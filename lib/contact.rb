@@ -1,5 +1,3 @@
-require ('address')
-
 class Contact
   attr_accessor(:first_name, :last_name, :job_title, :company, :contact_type, :address)
   attr_reader(:id)
@@ -14,7 +12,10 @@ class Contact
     @company = attributes.fetch(:company)
     @contact_type = attributes.fetch(:contact_type)
     @id = -1
-    @address = attributes.fetch(:address)
+  end
+
+  def add_address(address_object)
+    @address = address_object
   end
 
   def assign_id

@@ -1,10 +1,15 @@
 require('sinatra')
 require('sinatra/reloader')
 also_reload('lib/**/*.rb')
-require('./lib/contact')
+require('./lib/contact.rb')
+require('./lib/address.rb')
 
 get('/') do
   erb(:index)
+end
+
+get('/add_contact') do
+  erb(:add_contact)
 end
 
 post('/add_contact') do
@@ -18,7 +23,9 @@ post('/add_contact') do
 # @street_address =
 # @zip =
 
- new_contact = Contact.new({:first_name => "", :last_name => "", :job_title => "", :company => "", :contact_type => "", :phone_number => ""})
+ new_contact = Contact.new({:first_name => "", :last_name => "", :job_title => "", :company => "", :contact_type => ""})
+
+ erb(:index)
 
 
 end
