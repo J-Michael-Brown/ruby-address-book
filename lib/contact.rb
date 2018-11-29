@@ -23,11 +23,21 @@ class Contact
     @id = @@next_id
   end
 
+  def self.find(id)
+    contact_id = id.to_i()
+    @@contacts.each do |contact|
+      if contact.id == contact_id
+        return contact
+      end
+    end
+  end
+
   def self.all
     @@contacts
   end
 
   def add_contact
+    self.assign_id
     @@contacts.push(self)
   end
 

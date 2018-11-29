@@ -1,0 +1,11 @@
+
+<h3>Name: <%= @contact.first_name + " " + @contact.last_name %></h3>
+
+<h3>Job Title: <%= @contact.job_title %></h3>
+
+<h3>Company: <%= @contact.company %></h3>
+
+<h3>Relationship: <%= @contact.contact_type %></h3>
+
+<a href="/">Return to contacts list</a>
+<a href="/contacts/<%= contact.id() %>/add_address">Add Address</a>

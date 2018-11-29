@@ -1,5 +1,9 @@
 <h2>Contacts</h2>
 
+<% @contacts.each do |contact| %>
+  <a href="/contacts/<%= contact.id() %>"><%= contact.first_name() + " " + contact.last_name() %></a><br>
+<% end %>
+
 
 
 <form action="/add_contact" method="get">

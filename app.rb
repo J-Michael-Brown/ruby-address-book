@@ -3,8 +3,10 @@ require('sinatra/reloader')
 also_reload('lib/**/*.rb')
 require('./lib/contact.rb')
 require('./lib/address.rb')
+require('pry')
 
 get('/') do
+  @contacts = Contact.all()
   erb(:index)
 end
 
@@ -18,14 +20,14 @@ post('/add_contact') do
 @job_title = params.fetch("contact-job-title")
 @company = params.fetch("contact-company")
 @contact_type = params.fetch("contact-type")
-# @phone_number = params.fetch("contact-phone-number")
-# @city =
-# @street_address =
-# @zip =
 
- new_contact = Contact.new({:first_name => "", :last_name => "", :job_title => "", :company => "", :contact_type => ""})
+ new_contact = Contact.new({:first_name => @first_name, :last_name => @last_name, :job_title => @job_title, :company => @company, :contact_type => @contact_type})
+ new_contact.add_contact
 
- erb(:index)
+ erb(:contacts)
+end
 
-
+get('/contacts/:id') do
+  @contact = Contact.find(params[:id])
+  erb(:contacts)
 end
