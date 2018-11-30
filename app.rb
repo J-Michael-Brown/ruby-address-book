@@ -22,12 +22,31 @@ post('/add_contact') do
 @contact_type = params.fetch("contact-type")
 
  new_contact = Contact.new({:first_name => @first_name, :last_name => @last_name, :job_title => @job_title, :company => @company, :contact_type => @contact_type})
- new_contact.add_contact
+ Contact.add_contact(new_contact)
 
- erb(:contacts)
+ erb(:add_contact)
 end
 
 get('/contacts/:id') do
   @contact = Contact.find(params[:id])
+  Contact.current_id(@contact.id().to_s)
   erb(:contacts)
+end
+
+get('/add_address/:id') do
+  @contact = Contact.find(params[:id])
+  erb(:add_address)
+end
+
+post('/add_address/:id') do
+  @contact = Contact.find(params[:id])
+  @street = params.fetch('contact-street')
+  @city = params.fetch('contact-city')
+  @zip = params.fetch('contact-zip')
+  @phone = params.fetch('contact-phone')
+
+  temp_address = Address.new({:street_address => @street, :city => @city,:zip => @zip, :phone_number => @phone})
+
+  Contact.add_address(temp_address, @contact)
+  erb(:add_address)
 end

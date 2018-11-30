@@ -7,5 +7,15 @@
 
 <h3>Relationship: <%= @contact.contact_type %></h3>
 
+<% if @contact.address %>
+  <h3>Street Address: <%= @contact.address.street_address %></h3>
+
+  <h3>City: <%= @contact.address.city %></h3>
+
+  <h3>Zip: <%= @contact.address.zip %></h3>
+
+  <h3>Phone Number: <%= @contact.address.phone_number %></h3>
+<% end %>
+
 <a href="/">Return to contacts list</a>
-<a href="/contacts/<%= contact.id() %>/add_address">Add Address</a>
+<a href="/add_address/<%= @contact.id() %>">Add Address</a>

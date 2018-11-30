@@ -15,18 +15,28 @@ describe('.contact') do
   describe('#add_contact') do
     it('Add new contact to list') do
       tester = Contact.new({:first_name => "Cinderella", :last_name => "brown", :job_title => "student", :company => "epicodus", :contact_type => "casual"})
-      tester.add_contact()
+      Contact.add_contact(tester)
       expect(Contact.all.include?(tester)).to(eq(true))
     end
 
   end
 
-  describe('#add_address') do
+  describe('#make_address') do
     it "adds an address object to the contact" do
       tester = Contact.new({:first_name => "Cinderella", :last_name => "brown", :job_title => "student", :company => "epicodus", :contact_type => "casual"})
       test_address = Address.new({:city=> "portland", :street_address=> "main street", :zip=> "97219", :phone_number=> "555-1234"})
-      expect(tester.add_address(test_address)).to eq(tester.address)
+      expect(tester.make_address(test_address)).to eq(tester.address)
       expect(tester.address).to eq(test_address)
+    end
+  end
+
+  describe('#self.find') do
+    it "returns a copy of the contact in the @@contact list, using a string version of an id" do
+      find_tester = Contact.new({:first_name => "Cinderella", :last_name => "brown", :job_title => "student", :company => "epicodus", :contact_type => "casual"})
+      Contact.add_contact(find_tester)
+      find_tester_check = Contact.find(find_tester.id.to_s) #returning as an array
+      expect(find_tester).to eq(find_tester_check)
+
     end
   end
 
